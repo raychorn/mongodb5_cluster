@@ -43,6 +43,12 @@ setuptools="0"
 
 if [[ -f $python39 ]]
 then
+    PY3_VERS=$($python39 -c 'import sys; i=sys.version_info; print("{}.{}".format(i.major,i.minor))')
+    PIP3_VERS_TEST=$pip3 --version | grep $PY3_VERS
+    if [[ -z "$PIP3_VERS_TEST" ]]
+    then
+        pip3=
+    fi
     pip_local=$LOCAL_BIN/pip3
     if [[ -f $pip_local ]]
     then
